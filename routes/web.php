@@ -6,9 +6,11 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::view('/', 'landing')->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -33,5 +35,6 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
 Route::post('/chat/send', [ChatController::class, 'send'])->name('chat.send');
+Route::post('/chat/reset', [ChatController::class, 'resetSession'])->name('chat.reset');
 
 require __DIR__.'/auth.php';
